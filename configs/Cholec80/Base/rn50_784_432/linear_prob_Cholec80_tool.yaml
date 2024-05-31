@@ -1,0 +1,55 @@
+epochs: 80
+log_frequency: 10
+warmup_epochs: 0
+blr: 0.2
+lr: 0.2
+blr_scale: linear
+num_classes: 7
+min_lr: 0.0
+sync_bn: True
+weight_decay: 1.e-4
+amp: true
+snapshot_epoch: 10
+metric: binary_multi_cls
+pretrain_weight: 'pretrain'
+
+criterion:
+  name: BCELoss
+  weight: 
+    - 0.5441829694735847
+    - 9.651238591916558
+    - 0.9923180099987806
+    - 43.39945652173913
+    - 28.87020109689214
+    - 9.980510752688172
+    - 10.729361091170137
+
+model:
+  name: SimCLR
+  backbone: 'resnet-50'
+  get_features: False
+  c_k: 7
+  num_classes: $num_classes
+
+optimizer:
+  name: SGD
+  lr: $lr
+  weight_decay: $weight_decay
+  momentum: 0.9
+  nesterov: true
+
+dataset:
+  name: DatasetGenerator
+  train_bs: 64
+  eval_bs: 128
+  n_workers: 4
+  train_d_type: cholec80_tool
+  train_tf_op: cholec80_tool
+  val_d_type: cholec80_tool
+  val_tf_op: cholec80_tool
+  test_d_type: cholec80_tool
+  test_tf_op: cholec80_tool
+  train_path: /scratch/punim1399/cholec80
+  val_path: /scratch/punim1399/cholec80
+  test_path: /scratch/punim1399/cholec80
+  train_portion: 0.8

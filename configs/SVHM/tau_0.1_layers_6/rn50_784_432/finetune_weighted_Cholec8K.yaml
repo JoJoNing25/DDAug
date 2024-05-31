@@ -1,0 +1,48 @@
+num_classes: 8
+epochs: 100
+log_frequency: 10
+warmup_epochs: 5
+lr: 0.005
+min_lr: 1.0e-05
+sync_bn: true
+eval_freq: 1
+weight_decay: 0.1
+layer_decay: 0.75
+pretrain_weight: experiments/SVHM/tau_0.1_layers_6/rn50_784_432/pretrain_weighted/checkpoints/model_state_dict.pt
+criterion:
+  name: CrossEntropyLoss2d
+  ignore_index: 255
+model:
+  name: DeepV3Plus
+  num_classes: $num_classes
+  trunk: resnet-50
+  imagenet_pretrained: false
+  drop_rates:
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  c_k: 7
+optimizer:
+  name: AdamW
+  lr: $lr
+  weight_decay: $weight_decay
+dataset:
+  name: DatasetGenerator
+  train_bs: 8
+  eval_bs: 8
+  n_workers: 8
+  train_d_type: CholecSeg8k
+  train_tf_op: CholecSeg8k784_finetune
+  val_d_type: CholecSeg8k
+  val_tf_op: CholecSeg8k784_finetune
+  test_d_type: CholecSeg8k
+  test_tf_op: CholecSeg8k784_finetune
+  train_path: /scratch/punim1399/cholecseg8k/train
+  val_path: /scratch/punim1399/cholecseg8k/val
+  test_path: /scratch/punim1399/cholecseg8k/test
+  img_folder_pattern: '*/*/*endo.png'
+  mask_folder_pattern: '*/*/*endo_watershed_mask.png'
+  train_portion: 1
+  type: CholecSeg8k
+  num_classes: $num_classes

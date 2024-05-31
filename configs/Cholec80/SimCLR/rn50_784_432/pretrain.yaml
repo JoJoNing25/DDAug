@@ -1,0 +1,39 @@
+epochs: 50
+log_frequency: 100
+warmup_epochs: 5
+blr: 0.075
+lr: 0.075
+blr_scale: sqrt
+min_lr: 0.0
+sync_bn: True
+weight_decay: 1.e-6
+amp: true
+snapshot_epoch: 5
+
+criterion:
+  name: NTXentLossKornia
+  gather_distributed: True
+  temperature: 0.1
+
+model:
+  name: SimCLR
+  backbone: 'resnet-50'
+  get_features: True
+  c_k: 7
+
+optimizer:
+  name: LARS
+  lr: $lr
+  momentum: 0.9
+  weight_decay: $weight_decay
+
+dataset:
+  name: DatasetGenerator
+  train_bs: 48
+  n_workers: 8
+  train_d_type: 'SVHM_LC'
+  train_tf_op: 'cholec80_pretrain'
+  train_path: '/scratch/punim1399/cholec80/videos'
+  img_folder_pattern: '*/*.png'
+  train_portion: 1.0
+  id_to_cls_name: SVHM_LC

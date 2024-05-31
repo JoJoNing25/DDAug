@@ -1,0 +1,33 @@
+epochs: 5
+log_frequency: 200
+amp: true
+lr: 0.01
+min_lr: 0
+lid_k: 16
+warmup_epochs: 0
+pretrain_weight: experiments/SVHM/Base/rn50_784_432/pretrain/checkpoints/model_state_dict.pt
+policy:
+  name: AugPolicy
+  layers: 8
+  temperature: 0.1
+model:
+  name: SimCLR
+  backbone: resnet-50
+  get_features: true
+  c_k: 7
+  no_projection_head: true
+optimizer:
+  name: Adam
+  lr: 0.01
+  weight_decay: 0
+dataset:
+  name: DatasetGenerator
+  train_bs: 32
+  n_workers: 8
+  train_d_type: SVHM_LC
+  train_tf_op: SVHM_LC_simclr_kornia_pretrain
+  train_path: /data/scratch/projects/punim1399/lap_choley/ssl_dataset_4fps
+  img_folder_pattern: '*/*.png'
+  train_portion: 1
+  id_to_cls_name: SVHM_LC
+  filiter_list_file: /data/scratch/projects/punim1399/lap_choley/ssl_dataset_4fps/results_4fps.json
