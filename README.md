@@ -79,7 +79,7 @@ If you use this code in your work, please cite the accompanying paper:
 zhou2024dda,
 title={{DDA}: Dimensionality Driven Augmentation Search for Contrastive Learning in Laparoscopic Surgery},
 author={Yuning Zhou and Henry Badgery and Matthew Read and James Bailey and Catherine Davey},
-booktitle={Submitted to Medical Imaging with Deep Learning},
+booktitle={Medical Imaging with Deep Learning},
 year={2024}
 }
 
