@@ -1,6 +1,6 @@
 # DDA: Dimensionality Driven Augmentation Search for Contrastive Learning in Laparoscopic Surgery
 
-Code for MIDL2024 paper ["DDA: Dimensionality Driven Augmentation Search for Contrastive Learning in Laparoscopic Surgery"](https://arxiv.org/abs/2401.10474)
+Code for MIDL2024 paper ["DDA: Dimensionality Driven Augmentation Search for Contrastive Learning in Laparoscopic Surgery"](https://arxiv.org/abs/2406.00907)
 
 ---
 ## DDAug pipeline
